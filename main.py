@@ -269,6 +269,7 @@ def main():
 
     for source in SOURCES:
         label = source["label"]
+        source_type = source["type"]
         items = collect(source)
         if not items:
             continue
@@ -279,10 +280,11 @@ def main():
             # Also seed the global dedup set so these don't get sent later if the
             # same article also shows up under a different, already-active source.
             state[label] = current_ids[:MAX_KEEP_PER_SOURCE]
-            for _, _, url in items:
-                if url not in global_sent_set:
-                    global_sent_set.add(url)
-                    global_sent.append(url)
+            for aid, _, _ in items:
+                canonical = f"{source_type}:{aid}"
+                if canonical not in global_sent_set:
+                    global_sent_set.add(canonical)
+                    global_sent.append(canonical)
             print(f"[INIT] {label}: baseline {len(current_ids)} articles")
             continue
 
@@ -290,14 +292,19 @@ def main():
         new_items = [it for it in items if it[0] not in seen_ids]
 
         for aid, title, url in reversed(new_items):  # oldest of the new batch first
-            if url not in global_sent_set:
+            # Dedup on (source_type, article id) rather than the full URL:
+            # some sites (thebell) embed the *listing page's* category code
+            # into the article link, so the same article gets a different
+            # URL depending on which of our sources found it.
+            canonical = f"{source_type}:{aid}"
+            if canonical not in global_sent_set:
                 text = f"{title}\n{url}"
                 if send_telegram(token, chat_id, text):
                     sent_count += 1
                     print(f"[SENT] {label}: {title}")
                 time.sleep(0.5)
-            global_sent_set.add(url)
-            global_sent.append(url)
+            global_sent_set.add(canonical)
+            global_sent.append(canonical)
 
         merged = current_ids + [i for i in state[label] if i not in set(current_ids)]
         state[label] = merged[:MAX_KEEP_PER_SOURCE]
