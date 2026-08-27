@@ -1,0 +1,18 @@
+{
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "www.thebell.co.kr",
+        "thebell.co.kr",
+        "www.ibtomato.com",
+        "ibtomato.com",
+        "news.einfomax.co.kr",
+        "marketin.edaily.co.kr",
+        "www.hankyung.com",
+        "hankyung.com",
+        "dealsite.co.kr",
+        "api.telegram.org"
+      ]
+    }
+  }
+}
