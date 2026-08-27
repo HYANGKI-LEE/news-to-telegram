@@ -43,6 +43,9 @@ SOURCES = [
     {"label": "딜사이트_산업", "type": "dealsite", "category_code": "068000"},
     {"label": "딜사이트_증권", "type": "dealsite", "category_code": "089000"},
     {"label": "딜사이트_인수합병", "type": "dealsite", "category_code": "080000"},
+    {"label": "조선비즈_증권", "type": "chosun", "url": "https://biz.chosun.com/stock/"},
+    {"label": "조선비즈_금융", "type": "chosun", "url": "https://biz.chosun.com/finance/"},
+    {"label": "조선비즈_산업", "type": "chosun", "url": "https://biz.chosun.com/industry/"},
 ]
 
 
@@ -175,11 +178,40 @@ def parse_dealsite(category_code):
     return dedup_by_id(items)
 
 
+def json_unescape(s):
+    try:
+        return json.loads('"' + s + '"')
+    except Exception:
+        return s
+
+
+def parse_chosun(raw):
+    # Arc XP (chosun's CMS) embeds the article feed as JSON inside a
+    # <script> tag rather than plain <a> tags, so pull canonical_url /
+    # headlines.basic pairs straight out of that JSON blob.
+    items = []
+    pattern = re.compile(
+        r'"canonical_url":"((?:[^"\\]|\\.)*)".*?"headlines":\{"basic":"((?:[^"\\]|\\.)*)"',
+        re.S,
+    )
+    for m in pattern.finditer(raw):
+        path = json_unescape(m.group(1))
+        title = clean(json_unescape(m.group(2)))
+        if not title or not path:
+            continue
+        aid = path.rstrip("/").split("/")[-1]
+        if not aid:
+            continue
+        items.append((aid, title, "https://biz.chosun.com" + path))
+    return dedup_by_id(items)
+
+
 PARSERS = {
     "thebell": parse_thebell,
     "ibtomato": parse_ibtomato,
     "edaily": parse_edaily,
     "hankyung": parse_hankyung,
+    "chosun": parse_chosun,
 }
 
 
