@@ -17,14 +17,9 @@ import urllib.request
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(BASE_DIR, "state.json")
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
-SUBSCRIBERS_PATH = os.path.join(BASE_DIR, "subscribers.json")
 MAX_KEEP_PER_SOURCE = 300
 GLOBAL_SENT_KEY = "_global_sent_urls"
 MAX_GLOBAL_SENT = 3000
-WELCOME_TEXT = (
-    "\U0001F4F0 기업뉴스 구독이 시작됐어요!\n"
-    "더벨/IB토마토/연합인포맥스/이데일리/한국경제/딜사이트의 새 기사를 자동으로 보내드릴게요."
-)
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -202,9 +197,6 @@ def collect(source):
 
 
 def send_telegram(token, chat_id, text):
-    """Returns True on success, False on a retryable/unknown failure, or the
-    string "blocked" when the recipient blocked the bot or the chat is gone
-    (so the caller can drop them from the subscriber list)."""
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     payload = json.dumps(
         {"chat_id": chat_id, "text": text, "disable_web_page_preview": False}
@@ -227,49 +219,12 @@ def send_telegram(token, chat_id, text):
                     pass
                 time.sleep(retry_after + 1)
                 continue
-            if e.code == 403 or (e.code == 400 and "chat not found" in body.lower()):
-                print(f"[INFO] dropping unreachable chat_id {chat_id}: {e.code} {body}", file=sys.stderr)
-                return "blocked"
             print(f"[ERROR] telegram send failed: {e.code} {body}", file=sys.stderr)
             return False
         except Exception as e:
             print(f"[ERROR] telegram send failed: {e}", file=sys.stderr)
             time.sleep(2)
     return False
-
-
-def load_subscribers():
-    data = load_json(SUBSCRIBERS_PATH, {})
-    return set(data.get("chat_ids", [])), data.get("last_update_id", 0)
-
-
-def save_subscribers(chat_ids, last_update_id):
-    save_json(SUBSCRIBERS_PATH, {"chat_ids": sorted(chat_ids), "last_update_id": last_update_id})
-
-
-def sync_subscribers(token, chat_ids, last_update_id):
-    """Poll getUpdates for anyone who has messaged the bot since the last
-    processed update, add them as a subscriber, and greet them."""
-    url = f"https://api.telegram.org/bot{token}/getUpdates?offset={last_update_id + 1}&timeout=0"
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url), timeout=20) as resp:
-            data = json.loads(resp.read())
-    except Exception as e:
-        print(f"[WARN] getUpdates failed: {e}", file=sys.stderr)
-        return chat_ids, last_update_id
-
-    for update in data.get("result", []):
-        last_update_id = max(last_update_id, update["update_id"])
-        message = update.get("message") or {}
-        chat = message.get("chat") or {}
-        chat_id = chat.get("id")
-        if chat_id is None or chat_id in chat_ids:
-            continue
-        chat_ids.add(chat_id)
-        print(f"[SUBSCRIBE] new chat_id {chat_id}")
-        send_telegram(token, chat_id, WELCOME_TEXT)
-
-    return chat_ids, last_update_id
 
 
 def load_json(path, default):
@@ -291,7 +246,7 @@ def git(*args):
 def commit_and_push(sent_count):
     git("config", "user.email", "news-bot@local")
     git("config", "user.name", "news-bot")
-    git("add", "state.json", "subscribers.json")
+    git("add", "state.json")
     if git("diff", "--cached", "--quiet").returncode != 0:
         git("commit", "-m", f"update state ({sent_count} sent)")
         result = git("push")
@@ -302,17 +257,10 @@ def commit_and_push(sent_count):
 def main():
     config = load_json(CONFIG_PATH, {})
     token = os.environ.get("TELEGRAM_BOT_TOKEN") or config.get("telegram_bot_token")
-    default_chat_id = os.environ.get("TELEGRAM_CHAT_ID") or config.get("telegram_chat_id")
-    if not token:
-        print("Missing telegram_bot_token (env or config.json)", file=sys.stderr)
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID") or config.get("telegram_chat_id")
+    if not token or not chat_id:
+        print("Missing telegram_bot_token / telegram_chat_id (env or config.json)", file=sys.stderr)
         sys.exit(1)
-
-    chat_ids, last_update_id = load_subscribers()
-    if not chat_ids and default_chat_id:
-        chat_ids.add(int(default_chat_id))
-    chat_ids, last_update_id = sync_subscribers(token, chat_ids, last_update_id)
-    if not chat_ids:
-        print("No subscribers yet (no chat_id configured and nobody has messaged the bot).", file=sys.stderr)
 
     state = load_json(STATE_PATH, {})
     global_sent = state.get(GLOBAL_SENT_KEY, [])
@@ -342,18 +290,12 @@ def main():
         new_items = [it for it in items if it[0] not in seen_ids]
 
         for aid, title, url in reversed(new_items):  # oldest of the new batch first
-            if url not in global_sent_set and chat_ids:
+            if url not in global_sent_set:
                 text = f"{title}\n{url}"
-                blocked = set()
-                for cid in list(chat_ids):
-                    result = send_telegram(token, cid, text)
-                    if result == "blocked":
-                        blocked.add(cid)
-                    elif result:
-                        sent_count += 1
-                    time.sleep(0.4)
-                chat_ids -= blocked
-                print(f"[SENT] {label}: {title}")
+                if send_telegram(token, chat_id, text):
+                    sent_count += 1
+                    print(f"[SENT] {label}: {title}")
+                time.sleep(0.5)
             global_sent_set.add(url)
             global_sent.append(url)
 
@@ -362,8 +304,7 @@ def main():
 
     state[GLOBAL_SENT_KEY] = global_sent[-MAX_GLOBAL_SENT:]
     save_json(STATE_PATH, state)
-    save_subscribers(chat_ids, last_update_id)
-    print(f"Done. Sent {sent_count} messages across {len(chat_ids)} subscriber(s).")
+    print(f"Done. Sent {sent_count} new articles.")
     commit_and_push(sent_count)
 
 
