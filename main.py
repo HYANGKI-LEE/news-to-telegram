@@ -18,6 +18,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(BASE_DIR, "state.json")
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 MAX_KEEP_PER_SOURCE = 300
+GLOBAL_SENT_KEY = "_global_sent_urls"
+MAX_GLOBAL_SENT = 3000
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -261,6 +263,8 @@ def main():
         sys.exit(1)
 
     state = load_json(STATE_PATH, {})
+    global_sent = state.get(GLOBAL_SENT_KEY, [])
+    global_sent_set = set(global_sent)
     sent_count = 0
 
     for source in SOURCES:
@@ -271,8 +275,14 @@ def main():
         current_ids = [aid for aid, _, _ in items]
 
         if label not in state:
-            # first run for this source: baseline only, don't spam existing articles
+            # first run for this source: baseline only, don't spam existing articles.
+            # Also seed the global dedup set so these don't get sent later if the
+            # same article also shows up under a different, already-active source.
             state[label] = current_ids[:MAX_KEEP_PER_SOURCE]
+            for _, _, url in items:
+                if url not in global_sent_set:
+                    global_sent_set.add(url)
+                    global_sent.append(url)
             print(f"[INIT] {label}: baseline {len(current_ids)} articles")
             continue
 
@@ -280,15 +290,19 @@ def main():
         new_items = [it for it in items if it[0] not in seen_ids]
 
         for aid, title, url in reversed(new_items):  # oldest of the new batch first
-            text = f"{title}\n{url}"
-            if send_telegram(token, chat_id, text):
-                sent_count += 1
-                print(f"[SENT] {label}: {title}")
-            time.sleep(0.5)
+            if url not in global_sent_set:
+                text = f"{title}\n{url}"
+                if send_telegram(token, chat_id, text):
+                    sent_count += 1
+                    print(f"[SENT] {label}: {title}")
+                time.sleep(0.5)
+            global_sent_set.add(url)
+            global_sent.append(url)
 
         merged = current_ids + [i for i in state[label] if i not in set(current_ids)]
         state[label] = merged[:MAX_KEEP_PER_SOURCE]
 
+    state[GLOBAL_SENT_KEY] = global_sent[-MAX_GLOBAL_SENT:]
     save_json(STATE_PATH, state)
     print(f"Done. Sent {sent_count} new articles.")
     commit_and_push(sent_count)
