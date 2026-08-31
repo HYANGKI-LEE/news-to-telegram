@@ -8,9 +8,17 @@ on:
 permissions:
   contents: write
 
+# Prevent overlapping runs: if a run is still going when the next trigger
+# fires, queue the new one instead of letting both read/send from the same
+# state.json at once (which would double-send new articles).
+concurrency:
+  group: poll-news
+  cancel-in-progress: false
+
 jobs:
   poll:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
