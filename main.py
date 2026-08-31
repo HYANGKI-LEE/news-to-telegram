@@ -43,9 +43,9 @@ SOURCES = [
     {"label": "딜사이트_산업", "type": "dealsite", "category_code": "068000"},
     {"label": "딜사이트_증권", "type": "dealsite", "category_code": "089000"},
     {"label": "딜사이트_인수합병", "type": "dealsite", "category_code": "080000"},
-    {"label": "조선비즈_증권", "type": "chosun", "url": "https://biz.chosun.com/stock/"},
-    {"label": "조선비즈_금융", "type": "chosun", "url": "https://biz.chosun.com/finance/"},
-    {"label": "조선비즈_산업", "type": "chosun", "url": "https://biz.chosun.com/industry/"},
+    {"label": "조선비즈_증권", "type": "chosun", "url": "https://biz.chosun.com/stock/", "section": "stock"},
+    {"label": "조선비즈_금융", "type": "chosun", "url": "https://biz.chosun.com/finance/", "section": "stock/finance"},
+    {"label": "조선비즈_산업", "type": "chosun", "url": "https://biz.chosun.com/industry/", "section": "industry"},
 ]
 
 
@@ -185,19 +185,25 @@ def json_unescape(s):
         return s
 
 
-def parse_chosun(raw):
+def parse_chosun(raw, section):
     # Arc XP (chosun's CMS) embeds the article feed as JSON inside a
     # <script> tag rather than plain <a> tags, so pull canonical_url /
-    # headlines.basic pairs straight out of that JSON blob.
+    # headlines.basic pairs straight out of that JSON blob. The page also
+    # embeds sidebar widgets (e.g. "많이 본 뉴스") pulling from unrelated
+    # sections, so only keep articles whose canonical_url is under this
+    # source's own section.
     items = []
+    prefix = f"/{section}/"
     pattern = re.compile(
         r'"canonical_url":"((?:[^"\\]|\\.)*)".*?"headlines":\{"basic":"((?:[^"\\]|\\.)*)"',
         re.S,
     )
     for m in pattern.finditer(raw):
         path = json_unescape(m.group(1))
+        if not path or not path.startswith(prefix):
+            continue
         title = clean(json_unescape(m.group(2)))
-        if not title or not path:
+        if not title:
             continue
         aid = path.rstrip("/").split("/")[-1]
         if not aid:
@@ -211,7 +217,6 @@ PARSERS = {
     "ibtomato": parse_ibtomato,
     "edaily": parse_edaily,
     "hankyung": parse_hankyung,
-    "chosun": parse_chosun,
 }
 
 
@@ -222,6 +227,8 @@ def collect(source):
         raw = fetch(source["url"])
         if source["type"] == "einfomax":
             return parse_einfomax(raw, source["category"])
+        if source["type"] == "chosun":
+            return parse_chosun(raw, source["section"])
         return PARSERS[source["type"]](raw)
     except Exception as e:
         print(f"[WARN] {source['label']} fetch failed: {e}", file=sys.stderr)
