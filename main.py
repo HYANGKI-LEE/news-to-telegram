@@ -19,9 +19,37 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(BASE_DIR, "state.json")
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 MAX_KEEP_PER_SOURCE = 300
-MAX_ARTICLE_AGE = timedelta(days=3)
+MAX_ARTICLE_AGE = timedelta(days=14)
 GLOBAL_SENT_KEY = "_global_sent_urls"
 MAX_GLOBAL_SENT = 3000
+KST = timezone(timedelta(hours=9))
+
+
+def is_stale(display_date):
+    """True if display_date (an aware datetime, or None) is older than
+    MAX_ARTICLE_AGE. None means we couldn't determine a date, in which
+    case we keep relying on id-novelty alone rather than dropping it."""
+    if display_date is None:
+        return False
+    return datetime.now(timezone.utc) - display_date > MAX_ARTICLE_AGE
+
+
+def mmdd_hm_to_kst(text, now_kst):
+    """Parse a dateless 'MM.DD HH:MM' string (einfomax) into an aware KST
+    datetime, inferring the year from now and rolling back a year if the
+    parsed month/day would otherwise land in the future (year-boundary)."""
+    m = re.match(r"(\d{2})\.(\d{2}) (\d{2}):(\d{2})", text)
+    if not m:
+        return None
+    month, day, hour, minute = (int(x) for x in m.groups())
+    year = now_kst.year
+    try:
+        dt = datetime(year, month, day, hour, minute, tzinfo=KST)
+    except ValueError:
+        return None
+    if dt > now_kst + timedelta(days=1):
+        dt = dt.replace(year=year - 1)
+    return dt
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -83,17 +111,32 @@ def dedup_by_id(items):
 
 
 def parse_thebell(raw):
+    # thebell's own article key embeds its publish timestamp
+    # (YYYYMMDDHHMMSS + serial), so use that directly.
     items = []
     for m in re.finditer(r'href="(/front/newsview\.asp\?[^"]*key=(\d+)[^"]*)"[^>]*>([^<]*)', raw):
         title = clean(m.group(3))
         if not title:
             continue
+        key = m.group(2)
+        try:
+            display_date = datetime.strptime(key[:14], "%Y%m%d%H%M%S").replace(tzinfo=KST)
+        except ValueError:
+            display_date = None
+        if is_stale(display_date):
+            continue
         href = html_lib.unescape(m.group(1))
-        items.append((m.group(2), title, "https://www.thebell.co.kr" + href))
+        items.append((key, title, "https://www.thebell.co.kr" + href))
     return dedup_by_id(items)
 
 
 def parse_ibtomato(raw):
+    # No visible per-article date field, but each item's thumbnail is
+    # named NR_<YYMMDDHHMMSS>..., keyed to the same "no=" id, so use that.
+    thumb_dates = {}
+    for m in re.finditer(r'/View\.aspx\?no=(\d+)[^"]*"><img[^>]*NR_(\d{12})', raw):
+        thumb_dates.setdefault(m.group(1), m.group(2))
+
     items = []
     pattern = re.compile(
         r'<a[^>]*?title="([^"]*)"[^>]*?href="(/View\.aspx\?no=(\d+)[^"]*)"'
@@ -107,6 +150,15 @@ def parse_ibtomato(raw):
         title = clean(title)
         if not title:
             continue
+        display_date = None
+        code = thumb_dates.get(aid)
+        if code:
+            try:
+                display_date = datetime.strptime(code, "%y%m%d%H%M%S").replace(tzinfo=KST)
+            except ValueError:
+                display_date = None
+        if is_stale(display_date):
+            continue
         href = html_lib.unescape(href)
         items.append((aid, title, "https://www.ibtomato.com" + href))
     return dedup_by_id(items)
@@ -116,11 +168,14 @@ def parse_einfomax(raw, category):
     # einfomax's articleList.html ignores sc_section_code server-side and
     # always returns the site-wide latest feed; each <li> instead carries
     # its real section as plain text in <em class="info category">, so we
-    # have to filter on that ourselves.
+    # have to filter on that ourselves. Each <li> also carries a dateless
+    # "MM.DD HH:MM" stamp in <em class="info dated">.
     items = []
+    now_kst = datetime.now(KST)
     pattern = re.compile(
         r'<h4 class="titles"><a href="(/news/articleView\.html\?idxno=(\d+))"[^>]*>([^<]*)</a></h4>'
-        r'.*?<em class="info category">([^<]*)</em>',
+        r'.*?<em class="info category">([^<]*)</em>'
+        r'.*?<em class="info dated">([^<]*)</em>',
         re.S,
     )
     for m in pattern.finditer(raw):
@@ -129,29 +184,57 @@ def parse_einfomax(raw, category):
         title = clean(m.group(3))
         if not title:
             continue
+        display_date = mmdd_hm_to_kst(m.group(5).strip(), now_kst)
+        if is_stale(display_date):
+            continue
         href = html_lib.unescape(m.group(1))
         items.append((m.group(2), title, "https://news.einfomax.co.kr" + href))
     return dedup_by_id(items)
 
 
 def parse_edaily(raw):
+    # No visible per-article date text either, but each item's thumbnail
+    # path embeds .../PS<YYMMDD>..., keyed to the same newsId, so use that.
+    thumb_dates = {}
+    for m in re.finditer(r'News/Read\?newsId=(\d+)"><img[^>]*?PS(\d{2})(\d{2})(\d{2})', raw):
+        thumb_dates.setdefault(m.group(1), (m.group(2), m.group(3), m.group(4)))
+
     items = []
     for m in re.finditer(r'<a href="(/News/Read\?newsId=(\d+)[^"]*)"><span class=""></span>([^<]*)</a>', raw):
         title = clean(m.group(3))
         if not title:
             continue
+        newsid = m.group(2)
+        display_date = None
+        ymd = thumb_dates.get(newsid)
+        if ymd:
+            try:
+                yy, mm, dd = (int(x) for x in ymd)
+                display_date = datetime(2000 + yy, mm, dd, tzinfo=KST)
+            except ValueError:
+                display_date = None
+        if is_stale(display_date):
+            continue
         href = html_lib.unescape(m.group(1))
-        items.append((m.group(2), title, "https://marketin.edaily.co.kr" + href))
+        items.append((newsid, title, "https://marketin.edaily.co.kr" + href))
     return dedup_by_id(items)
 
 
 def parse_hankyung(raw):
+    # hankyung's own article id starts with its publish date (YYYYMMDD).
     items = []
     for m in re.finditer(r'href="(https://www\.hankyung\.com/article/([0-9A-Za-z]+))"[^>]*>([^<]{2,150})', raw):
         title = clean(m.group(3))
         if not title:
             continue
-        items.append((m.group(2), title, m.group(1)))
+        aid = m.group(2)
+        try:
+            display_date = datetime.strptime(aid[:8], "%Y%m%d").replace(tzinfo=KST)
+        except ValueError:
+            display_date = None
+        if is_stale(display_date):
+            continue
+        items.append((aid, title, m.group(1)))
     return dedup_by_id(items)
 
 
@@ -168,12 +251,20 @@ def parse_dealsite(category_code):
     data = json.loads(raw)
     articles_html = data.get("articlesHtml", "")
     items = []
-    for m in re.finditer(
-        r'class="ss-news-top-title"\s+href="(/articles/(\d+)/\d+)">\s*<span[^>]*>([^<]*)</span>',
-        articles_html,
-    ):
+    pattern = re.compile(
+        r'class="ss-news-top-title"\s+href="(/articles/(\d+)/\d+)">\s*<span[^>]*>([^<]*)</span>'
+        r'.*?<div class="mnm-news-info">\s*<span>[^<]*</span>\s*<span>([^<]*)</span>',
+        re.S,
+    )
+    for m in pattern.finditer(articles_html):
         title = clean(m.group(3))
         if not title:
+            continue
+        try:
+            display_date = datetime.strptime(m.group(4).strip(), "%Y-%m-%d %H:%M:%S").replace(tzinfo=KST)
+        except ValueError:
+            display_date = None
+        if is_stale(display_date):
             continue
         href = html_lib.unescape(m.group(1))
         items.append((m.group(2), title, "https://dealsite.co.kr" + href))
