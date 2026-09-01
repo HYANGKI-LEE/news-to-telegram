@@ -60,6 +60,7 @@ SOURCES = [
     {"label": "더벨_Finance", "type": "thebell", "url": "https://www.thebell.co.kr/front/NewsList.asp?Code=0200"},
     {"label": "더벨_채권", "type": "thebell", "url": "https://www.thebell.co.kr/front/NewsList.asp?Code=0101"},
     {"label": "더벨_산업", "type": "thebell", "url": "https://www.thebell.co.kr/front/NewsList.asp?Code=0400"},
+    {"label": "더벨_재무제표를읽는사람들", "type": "thebell", "url": "https://www.thebell.co.kr/front/newsList.asp?code=00&np=%EC%9E%AC%EB%AC%B4%EC%A0%9C%ED%91%9C%EB%A5%BC+%EC%9D%BD%EB%8A%94+%EC%82%AC%EB%9E%8C%EB%93%A4"},
     {"label": "IB토마토_산업", "type": "ibtomato", "url": "https://www.ibtomato.com/CateSub.aspx?cate=1100&subCate=1102&type=1"},
     {"label": "IB토마토_금융", "type": "ibtomato", "url": "https://www.ibtomato.com/CateSub.aspx?cate=1900&subCate=1902&type=1"},
     {"label": "IB토마토_Deal", "type": "ibtomato", "url": "https://www.ibtomato.com/CateSub.aspx?cate=1100&subCate=1101&type=1"},
