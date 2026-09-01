@@ -13,11 +13,13 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from datetime import datetime, timezone, timedelta
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(BASE_DIR, "state.json")
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 MAX_KEEP_PER_SOURCE = 300
+MAX_ARTICLE_AGE = timedelta(days=3)
 GLOBAL_SENT_KEY = "_global_sent_urls"
 MAX_GLOBAL_SENT = 3000
 
@@ -188,21 +190,32 @@ def json_unescape(s):
 def parse_chosun(raw, section):
     # Arc XP (chosun's CMS) embeds the article feed as JSON inside a
     # <script> tag rather than plain <a> tags, so pull canonical_url /
-    # headlines.basic pairs straight out of that JSON blob. The page also
-    # embeds sidebar widgets (e.g. "많이 본 뉴스") pulling from unrelated
-    # sections, so only keep articles whose canonical_url is under this
-    # source's own section.
+    # display_date / headlines.basic straight out of that JSON blob. The
+    # page also embeds sidebar widgets (e.g. "많이 본 뉴스") pulling from
+    # unrelated sections and occasionally resurfaces old evergreen pieces
+    # (e.g. a months-old interview) under a "new" id we've never seen, so
+    # besides the section filter, drop anything whose own publish date is
+    # stale rather than trusting id-novelty alone.
     items = []
     prefix = f"/{section}/"
+    now = datetime.now(timezone.utc)
     pattern = re.compile(
-        r'"canonical_url":"((?:[^"\\]|\\.)*)".*?"headlines":\{"basic":"((?:[^"\\]|\\.)*)"',
+        r'"canonical_url":"((?:[^"\\]|\\.)*)".*?'
+        r'"display_date":"([^"]*)".*?'
+        r'"headlines":\{"basic":"((?:[^"\\]|\\.)*)"',
         re.S,
     )
     for m in pattern.finditer(raw):
         path = json_unescape(m.group(1))
         if not path or not path.startswith(prefix):
             continue
-        title = clean(json_unescape(m.group(2)))
+        try:
+            display_date = datetime.fromisoformat(m.group(2).replace("Z", "+00:00"))
+        except ValueError:
+            display_date = None
+        if display_date and now - display_date > MAX_ARTICLE_AGE:
+            continue
+        title = clean(json_unescape(m.group(3)))
         if not title:
             continue
         aid = path.rstrip("/").split("/")[-1]
