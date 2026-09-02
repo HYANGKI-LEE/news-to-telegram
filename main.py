@@ -131,13 +131,30 @@ def parse_thebell(raw):
     return dedup_by_id(items)
 
 
-def parse_ibtomato(raw):
-    # No visible per-article date field, but each item's thumbnail is
-    # named NR_<YYMMDDHHMMSS>..., keyed to the same "no=" id, so use that.
-    thumb_dates = {}
-    for m in re.finditer(r'/View\.aspx\?no=(\d+)[^"]*"><img[^>]*NR_(\d{12})', raw):
-        thumb_dates.setdefault(m.group(1), m.group(2))
+IBTOMATO_DATE_RE = re.compile(
+    r'lbChulgoDate">[^0-9]*(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})'
+)
 
+
+def fetch_ibtomato_article_date(url):
+    """The listing page's thumbnail-filename date guess (NR_<YYMMDDHHMMSS>)
+    turned out unreliable (same failure mode as edaily); each article's own
+    page has a real "입력 YYYY-MM-DD HH:MM:SS" timestamp in #lbChulgoDate."""
+    try:
+        raw = fetch(url)
+    except Exception:
+        return None
+    m = IBTOMATO_DATE_RE.search(raw)
+    if not m:
+        return None
+    y, mo, d, h, mi, s = (int(x) for x in m.groups())
+    try:
+        return datetime(y, mo, d, h, mi, s, tzinfo=KST)
+    except ValueError:
+        return None
+
+
+def parse_ibtomato(raw, known_ids):
     items = []
     pattern = re.compile(
         r'<a[^>]*?title="([^"]*)"[^>]*?href="(/View\.aspx\?no=(\d+)[^"]*)"'
@@ -151,18 +168,19 @@ def parse_ibtomato(raw):
         title = clean(title)
         if not title:
             continue
-        display_date = None
-        code = thumb_dates.get(aid)
-        if code:
-            try:
-                display_date = datetime.strptime(code, "%y%m%d%H%M%S").replace(tzinfo=KST)
-            except ValueError:
-                display_date = None
-        if is_stale(display_date):
-            continue
         href = html_lib.unescape(href)
         items.append((aid, title, "https://www.ibtomato.com" + href))
-    return dedup_by_id(items)
+    items = dedup_by_id(items)
+
+    result = []
+    for aid, title, url in items:
+        if aid in known_ids:
+            result.append((aid, title, url))
+            continue
+        if is_stale(fetch_ibtomato_article_date(url)):
+            continue
+        result.append((aid, title, url))
+    return result
 
 
 def parse_einfomax(raw, category):
@@ -343,7 +361,6 @@ def parse_chosun(raw, section):
 
 PARSERS = {
     "thebell": parse_thebell,
-    "ibtomato": parse_ibtomato,
     "hankyung": parse_hankyung,
 }
 
@@ -359,6 +376,8 @@ def collect(source, known_ids=()):
             return parse_chosun(raw, source["section"])
         if source["type"] == "edaily":
             return parse_edaily(raw, known_ids)
+        if source["type"] == "ibtomato":
+            return parse_ibtomato(raw, known_ids)
         return PARSERS[source["type"]](raw)
     except Exception as e:
         print(f"[WARN] {source['label']} fetch failed: {e}", file=sys.stderr)
