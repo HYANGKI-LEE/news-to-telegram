@@ -193,32 +193,56 @@ def parse_einfomax(raw, category):
     return dedup_by_id(items)
 
 
-def parse_edaily(raw):
-    # No visible per-article date text either, but each item's thumbnail
-    # path embeds .../PS<YYMMDD>..., keyed to the same newsId, so use that.
-    thumb_dates = {}
-    for m in re.finditer(r'News/Read\?newsId=(\d+)"><img[^>]*?PS(\d{2})(\d{2})(\d{2})', raw):
-        thumb_dates.setdefault(m.group(1), (m.group(2), m.group(3), m.group(4)))
+EDAILY_DATE_RE = re.compile(
+    r'\\"등록\\",\\" \\",\\"(\d{4})-(\d{2})-(\d{2}) (오전|오후) (\d{1,2}):(\d{2}):(\d{2})\\"'
+)
 
+
+def fetch_edaily_article_date(url):
+    """The listing page has no reliable per-article date (thumbnail-filename
+    guessing turned out to misfire), but each article's own page embeds a
+    real "등록 YYYY-MM-DD 오전/오후 H:MM:SS" registration timestamp."""
+    try:
+        raw = fetch(url)
+    except Exception:
+        return None
+    m = EDAILY_DATE_RE.search(raw)
+    if not m:
+        return None
+    y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    ampm, h, mi, s = m.group(4), int(m.group(5)), int(m.group(6)), int(m.group(7))
+    if ampm == "오후" and h != 12:
+        h += 12
+    elif ampm == "오전" and h == 12:
+        h = 0
+    try:
+        return datetime(y, mo, d, h, mi, s, tzinfo=KST)
+    except ValueError:
+        return None
+
+
+def parse_edaily(raw, known_ids):
     items = []
     for m in re.finditer(r'<a href="(/News/Read\?newsId=(\d+)[^"]*)"><span class=""></span>([^<]*)</a>', raw):
         title = clean(m.group(3))
         if not title:
             continue
         newsid = m.group(2)
-        display_date = None
-        ymd = thumb_dates.get(newsid)
-        if ymd:
-            try:
-                yy, mm, dd = (int(x) for x in ymd)
-                display_date = datetime(2000 + yy, mm, dd, tzinfo=KST)
-            except ValueError:
-                display_date = None
-        if is_stale(display_date):
-            continue
         href = html_lib.unescape(m.group(1))
         items.append((newsid, title, "https://marketin.edaily.co.kr" + href))
-    return dedup_by_id(items)
+    items = dedup_by_id(items)
+
+    result = []
+    for newsid, title, url in items:
+        if newsid in known_ids:
+            # already seen (or already rejected) before; no need to spend an
+            # extra request re-checking its date since it won't be sent again
+            result.append((newsid, title, url))
+            continue
+        if is_stale(fetch_edaily_article_date(url)):
+            continue
+        result.append((newsid, title, url))
+    return result
 
 
 def parse_hankyung(raw):
@@ -320,12 +344,11 @@ def parse_chosun(raw, section):
 PARSERS = {
     "thebell": parse_thebell,
     "ibtomato": parse_ibtomato,
-    "edaily": parse_edaily,
     "hankyung": parse_hankyung,
 }
 
 
-def collect(source):
+def collect(source, known_ids=()):
     try:
         if source["type"] == "dealsite":
             return parse_dealsite(source["category_code"])
@@ -334,6 +357,8 @@ def collect(source):
             return parse_einfomax(raw, source["category"])
         if source["type"] == "chosun":
             return parse_chosun(raw, source["section"])
+        if source["type"] == "edaily":
+            return parse_edaily(raw, known_ids)
         return PARSERS[source["type"]](raw)
     except Exception as e:
         print(f"[WARN] {source['label']} fetch failed: {e}", file=sys.stderr)
@@ -414,7 +439,7 @@ def main():
     for source in SOURCES:
         label = source["label"]
         source_type = source["type"]
-        items = collect(source)
+        items = collect(source, known_ids=set(state.get(label, [])))
         if not items:
             continue
         current_ids = [aid for aid, _, _ in items]
