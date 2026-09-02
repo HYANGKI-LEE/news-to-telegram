@@ -1808,6 +1808,7 @@
     "4432240"
   ],
   "연합인포_증권": [
+    "4433157",
     "4433146",
     "4433145",
     "4433143",
@@ -1864,7 +1865,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "thebell:202608271628050640108818",
     "thebell:202608281041514800103115",
     "thebell:202608281035592560101231",
     "thebell:202608281755406280104342",
@@ -4863,7 +4863,8 @@
     "chosun:Z6PL45R6H5BDJEGZ6UVX333SWE",
     "einfomax:4433154",
     "hankyung:2026090203371",
-    "chosun:PIP3MHTJNZD5HPY5L3PBKZOMLM"
+    "chosun:PIP3MHTJNZD5HPY5L3PBKZOMLM",
+    "einfomax:4433157"
   ],
   "조선비즈_증권": [
     "PIP3MHTJNZD5HPY5L3PBKZOMLM",
