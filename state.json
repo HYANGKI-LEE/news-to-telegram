@@ -906,6 +906,7 @@
     "202608311501398920102147"
   ],
   "IB토마토_산업": [
+    "19389",
     "19412",
     "19409",
     "19381",
@@ -1479,6 +1480,8 @@
     "2026082776161"
   ],
   "딜사이트_산업": [
+    "168118",
+    "167696",
     "168348",
     "168312",
     "168297",
@@ -1665,6 +1668,7 @@
     "167787"
   ],
   "딜사이트_증권": [
+    "167696",
     "168320",
     "168282",
     "168303",
@@ -1880,10 +1884,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "hankyung:202608289465g",
-    "hankyung:202608289479g",
-    "hankyung:202608289550i",
-    "hankyung:202608289602g",
     "hankyung:202608289643g",
     "hankyung:202608289483g",
     "hankyung:202608289661g",
@@ -4879,7 +4879,11 @@
     "chosun:7OZK6EU5X5HIFA4ZLH4SWEXWK4",
     "chosun:SLOL5HWJEVB23J3EDQWHUHRB6M",
     "chosun:SLOL5HWJEVB23J3EDQWHUHRB6M",
-    "chosun:ME4GKMTEGY2DKN3GHEYGKMRRMY"
+    "chosun:ME4GKMTEGY2DKN3GHEYGKMRRMY",
+    "ibtomato:19389",
+    "dealsite:167696",
+    "dealsite:168118",
+    "dealsite:167696"
   ],
   "조선비즈_증권": [
     "ME4GKMTEGY2DKN3GHEYGKMRRMY",
