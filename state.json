@@ -1543,6 +1543,7 @@
     "202608314032g"
   ],
   "딜사이트_산업": [
+    "168506",
     "168504",
     "168505",
     "168503",
@@ -2128,7 +2129,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "hankyung:202609017062i",
     "dealsite:168227",
     "chosun:MEOWFHIETJEDBATOHGEDX6IWMI",
     "thebell:202609011335525960104134",
@@ -5127,7 +5127,8 @@
     "dealsite:168505",
     "chosun:ZMPRF3P2FFG4REKL3QKGWQ5T7Y",
     "dealsite:168504",
-    "chosun:KF5YCOURZ5CEBDTJKQV2WG2AAI"
+    "chosun:KF5YCOURZ5CEBDTJKQV2WG2AAI",
+    "dealsite:168506"
   ],
   "조선비즈_증권": [
     "L5ZJ6YVD65DKJONSSOK4LPCIZ4",
