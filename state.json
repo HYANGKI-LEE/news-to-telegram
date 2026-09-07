@@ -1569,6 +1569,7 @@
     "202609028731g"
   ],
   "딜사이트_산업": [
+    "168589",
     "168600",
     "168601",
     "168568",
@@ -1867,8 +1868,7 @@
     "167904",
     "167877",
     "167908",
-    "167844",
-    "167841"
+    "167844"
   ],
   "딜사이트_증권": [
     "168510",
@@ -2266,7 +2266,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "einfomax:4433138",
     "hankyung:202609028772g",
     "dealsite:168301",
     "dealsite:168284",
@@ -5265,7 +5264,8 @@
     "dealsite:168600",
     "hankyung:2026090795481",
     "hankyung:2026090795431",
-    "hankyung:2026090795411"
+    "hankyung:2026090795411",
+    "dealsite:168589"
   ],
   "조선비즈_증권": [
     "RKGPSWXYRVDCXNTJNHLI2N7GSA",
@@ -5887,8 +5887,8 @@
     "FBA5NWGEGZFCPMWOM6YALPWJZE",
     "SJOWAIF5MZGSXIJ2JAMK4ZTMPQ",
     "ZRDYBQW325A5XK44INRFTYRML4",
-    "BGOLPDTY5ZF2ZLGV6IYLU6PK2Y",
     "2THLZRGNRNHZHL3DO7BD6MVTLY",
+    "BGOLPDTY5ZF2ZLGV6IYLU6PK2Y",
     "YTAC37YS3BDOZK55THKIXI6Y4M",
     "KN2QIY4AFNEZZPOF3QAEU24HVI",
     "75QQFC3NINC7FBYGUQLYFJSPEU",
