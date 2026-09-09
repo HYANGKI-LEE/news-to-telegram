@@ -906,6 +906,7 @@
     "202609071556044880105215"
   ],
   "IB토마토_산업": [
+    "19466",
     "19464",
     "19491",
     "19490",
@@ -2441,7 +2442,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "thebell:202609041208263320105585",
     "einfomax:4433512",
     "einfomax:4433513",
     "hankyung:202609043580g",
@@ -5440,7 +5440,8 @@
     "hankyung:202609094271g",
     "chosun:RMD2E66RIJGJBIQOKRIPSAHE4E",
     "ibtomato:19464",
-    "dealsite:168672"
+    "dealsite:168672",
+    "ibtomato:19466"
   ],
   "조선비즈_증권": [
     "UG2BNHSVTNEOHHQX64JLHMJO5A",
