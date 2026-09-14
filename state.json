@@ -906,6 +906,7 @@
     "202609101619216200107427"
   ],
   "IB토마토_산업": [
+    "19488",
     "19492",
     "19521",
     "19532",
@@ -2703,7 +2704,6 @@
     "4432250"
   ],
   "_global_sent_urls": [
-    "hankyung:202609094349g",
     "hankyung:202609094339i",
     "dealsite:168721",
     "chosun:N6LUSJJDBNG6HBHVWJ6CIWIKIY",
@@ -5702,7 +5702,8 @@
     "chosun:SXPIV6QOJJFGHE4VF3SHGLAYFE",
     "chosun:T2AF62MTTZE35I4G6NNVHAUDCQ",
     "chosun:RREAIFXMEZG53CZTM3UGDS3MOU",
-    "ibtomato:19492"
+    "ibtomato:19492",
+    "ibtomato:19488"
   ],
   "조선비즈_증권": [
     "SXPIV6QOJJFGHE4VF3SHGLAYFE",
