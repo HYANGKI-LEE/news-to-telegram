@@ -2707,6 +2707,7 @@
     "4432471"
   ],
   "연합인포_증권": [
+    "4435741",
     "4435740",
     "4435713",
     "4435690",
@@ -3005,11 +3006,9 @@
     "4432986",
     "4432937",
     "4432933",
-    "4432926",
-    "4432917"
+    "4432926"
   ],
   "_global_sent_urls": [
-    "thebell:202609151514463280108938",
     "thebell:202609151430097800104696",
     "einfomax:4434990",
     "hankyung:202609154912g",
@@ -6008,7 +6007,8 @@
     "dealsite:169359",
     "chosun:PAKVUDIXHNGUPJRMCF7JDXCGNI",
     "chosun:PZ3NUPCOHJGFHKJLVAKQ2YFJMI",
-    "einfomax:4435740"
+    "einfomax:4435740",
+    "einfomax:4435741"
   ],
   "조선비즈_증권": [
     "ZL22K6FFCJHIXGG5GQAWDAN2A4",
