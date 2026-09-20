@@ -1038,6 +1038,7 @@
     "19323"
   ],
   "IB토마토_금융": [
+    "19572",
     "19561",
     "19598",
     "19594",
@@ -3012,7 +3013,6 @@
     "4432990"
   ],
   "_global_sent_urls": [
-    "hankyung:2026091565531",
     "hankyung:2026091565551",
     "edaily:04218086645580448",
     "edaily:04631366645580448",
@@ -6011,7 +6011,8 @@
     "ibtomato:19561",
     "chosun:GH2R6KNIKZCRXN2E765P2OBGZ4",
     "chosun:F6H75OLU35GGRL2SKXN7DJBLIM",
-    "chosun:F6H75OLU35GGRL2SKXN7DJBLIM"
+    "chosun:F6H75OLU35GGRL2SKXN7DJBLIM",
+    "ibtomato:19572"
   ],
   "조선비즈_증권": [
     "GARXZPIXBVENZFYDIPWTHQR5LM",
