@@ -2823,6 +2823,7 @@
     "4433337"
   ],
   "연합인포_증권": [
+    "4436535",
     "4436534",
     "4436533",
     "4436463",
@@ -3121,11 +3122,9 @@
     "4433578",
     "4433528",
     "4433525",
-    "4433522",
-    "4433506"
+    "4433522"
   ],
   "_global_sent_urls": [
-    "chosun:SC3VJAPNUZCGNF5XJFQM7ADNTY",
     "chosun:MGALYJ4POVHATPEIXG4QJRXO3A",
     "einfomax:4435690",
     "hankyung:202609183942i",
@@ -6124,7 +6123,8 @@
     "einfomax:4436533",
     "einfomax:4436534",
     "hankyung:202609245253i",
-    "dealsite:169530"
+    "dealsite:169530",
+    "einfomax:4436535"
   ],
   "조선비즈_증권": [
     "WPSS6GB5FRH4XC3AOTZBWZ3QRY",
