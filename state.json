@@ -1612,6 +1612,8 @@
   "한국경제_산업": [
     "202609233120i",
     "202609255373i",
+    "202609255382i",
+    "202609233360H",
     "202609233761i",
     "202609266658i",
     "202609220854i",
@@ -1907,9 +1909,7 @@
     "202609183221i",
     "202609171810i",
     "202609183028i",
-    "202609182893g",
-    "202609182967g",
-    "2026091844701"
+    "202609182893g"
   ],
   "딜사이트_산업": [
     "169629",
@@ -3126,8 +3126,6 @@
     "4433604"
   ],
   "_global_sent_urls": [
-    "hankyung:202609183061g",
-    "hankyung:2026091844761",
     "hankyung:202609182897g",
     "hankyung:202609183926g",
     "chosun:GQ4GEMJXGZRTINRXGZSGCNRWHA",
@@ -6125,7 +6123,9 @@
     "chosun:IZIFI52EWFASPOS7GHR4RMFATI",
     "chosun:ELWNBZQZANECNE6PWRGQKE5GEM",
     "chosun:G5RDOMJWMI3DCNBUMQ2DEZLBMU",
-    "chosun:H53PGHWC7FFJVGQT7QMFVJRDDQ"
+    "chosun:H53PGHWC7FFJVGQT7QMFVJRDDQ",
+    "hankyung:202609233360H",
+    "hankyung:202609255382i"
   ],
   "조선비즈_증권": [
     "H53PGHWC7FFJVGQT7QMFVJRDDQ",
