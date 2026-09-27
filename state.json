@@ -906,6 +906,7 @@
     "202609221015529400102386"
   ],
   "IB토마토_산업": [
+    "19610",
     "19611",
     "19634",
     "19646",
@@ -3128,7 +3129,6 @@
     "4433603"
   ],
   "_global_sent_urls": [
-    "dealsite:169132",
     "dealsite:169289",
     "dealsite:169297",
     "dealsite:169331",
@@ -6127,7 +6127,8 @@
     "chosun:C4BRCVLCSBFJLGZY6TKJNXKLBU",
     "ibtomato:19611",
     "chosun:4B2A5DOHGBAZXHEPW5LXVLDPL4",
-    "chosun:EAKPIXBAL5FTJKKUWQKUSCZZ5I"
+    "chosun:EAKPIXBAL5FTJKKUWQKUSCZZ5I",
+    "ibtomato:19610"
   ],
   "조선비즈_증권": [
     "4GXNXGDUUVEJXB3C53357JWYK4",
