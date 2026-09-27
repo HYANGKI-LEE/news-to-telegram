@@ -906,6 +906,7 @@
     "202609221015529400102386"
   ],
   "IB토마토_산업": [
+    "19619",
     "19614",
     "19610",
     "19611",
@@ -1615,6 +1616,7 @@
   "한국경제_산업": [
     "2026092776591",
     "2026092776221",
+    "2026092879917",
     "2026092776581",
     "2026092776761",
     "2026092775571",
@@ -1911,8 +1913,7 @@
     "202609171621g",
     "2026091844851",
     "2026091844841",
-    "2026091844861",
-    "2026091844881"
+    "2026091844861"
   ],
   "딜사이트_산업": [
     "169629",
@@ -2219,6 +2220,8 @@
   "딜사이트_증권": [
     "169502",
     "169087",
+    "169229",
+    "169387",
     "169479",
     "169615",
     "169440",
@@ -3131,10 +3134,6 @@
     "4433603"
   ],
   "_global_sent_urls": [
-    "chosun:O3YAXRNRA5AETCUTMTLZXQN4IU",
-    "hankyung:202609171748g",
-    "chosun:52AX5XPPZVGO5BLNUYX6JJBKKM",
-    "chosun:UUGZVPV4EFD7FHNSH7JSB4ADXQ",
     "chosun:OF6BYLQJPVCKVHAGXKR3HVBDZU",
     "chosun:2KYUPAPRYBDNBCXNA3NOL7TH7U",
     "chosun:Z2QPPVQ7HJC4LKDX3SQAEMVQXU",
@@ -6130,7 +6129,11 @@
     "ibtomato:19614",
     "dealsite:169087",
     "chosun:QT433EWMBVDP7FAKYLBSTNB6HY",
-    "chosun:QT433EWMBVDP7FAKYLBSTNB6HY"
+    "chosun:QT433EWMBVDP7FAKYLBSTNB6HY",
+    "ibtomato:19619",
+    "hankyung:2026092879917",
+    "dealsite:169387",
+    "dealsite:169229"
   ],
   "조선비즈_증권": [
     "4GXNXGDUUVEJXB3C53357JWYK4",
