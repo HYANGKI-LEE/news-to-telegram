@@ -1958,6 +1958,7 @@
   ],
   "딜사이트_산업": [
     "169514",
+    "169831",
     "169809",
     "169775",
     "169754",
@@ -2255,8 +2256,7 @@
     "168743",
     "168662",
     "168394",
-    "169044",
-    "169179"
+    "169044"
   ],
   "딜사이트_증권": [
     "169743",
@@ -3209,7 +3209,6 @@
     "4433829"
   ],
   "_global_sent_urls": [
-    "thebell:202609221602242840108524",
     "thebell:202609221348164640106555",
     "einfomax:4436158",
     "einfomax:4436159",
@@ -6208,7 +6207,8 @@
     "dealsite:169672",
     "dealsite:169732",
     "dealsite:169743",
-    "ibtomato:19657"
+    "ibtomato:19657",
+    "dealsite:169831"
   ],
   "조선비즈_증권": [
     "HDIH6DOK7BAA5JKSG65KN6J47Y",
@@ -6241,8 +6241,8 @@
     "66IO326SXJDVDF4FZJZEB4YL7E",
     "CQHF5KBHMVH2BLXPRTQ3QGCM34",
     "32C2RRCVX5BCVI2ZXDKS2THT3I",
-    "R2NOPIF3LFDVHE3PGJWILIFOOY",
     "4B2A5DOHGBAZXHEPW5LXVLDPL4",
+    "R2NOPIF3LFDVHE3PGJWILIFOOY",
     "3WOMUR4ZBZBWRBW2BLCUVYE77I",
     "HTISLDAJGRB5HJMGM2AF2TVHMI",
     "SU6CKLFVIRA4DKYBEEKYOY5NWI",
