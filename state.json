@@ -2210,6 +2210,7 @@
   "딜사이트_산업": [
     "170081",
     "170079",
+    "170139",
     "170207",
     "170204",
     "170199",
@@ -2506,10 +2507,10 @@
     "169512",
     "169470",
     "169513",
-    "169413",
-    "168903"
+    "169413"
   ],
   "딜사이트_증권": [
+    "170139",
     "170158",
     "170151",
     "170120",
@@ -2808,10 +2809,10 @@
     "168059",
     "168058",
     "168060",
-    "168065",
-    "168120"
+    "168065"
   ],
   "딜사이트_인수합병": [
+    "170139",
     "169968",
     "169976",
     "169964",
@@ -3478,9 +3479,6 @@
     "4434749"
   ],
   "_global_sent_urls": [
-    "ibtomato:19655",
-    "dealsite:169596",
-    "dealsite:169727",
     "dealsite:169751",
     "dealsite:169783",
     "dealsite:169790",
@@ -6477,7 +6475,10 @@
     "chosun:SCETJPMCMZEMNBQIDSXJCEOH6E",
     "ibtomato:19712",
     "ibtomato:19708",
-    "ibtomato:19719"
+    "ibtomato:19719",
+    "dealsite:170139",
+    "dealsite:170139",
+    "dealsite:170139"
   ],
   "조선비즈_증권": [
     "GE4DONLEGUZDIMTFMEYTEZBUMM",
@@ -7104,8 +7105,8 @@
     "5TIKNHU4PJEGVPNEZG5ZTBKJUE",
     "6N4OW3N5ZNCSPF2CWRE7ZM22BM",
     "SCETJPMCMZEMNBQIDSXJCEOH6E",
-    "NB76OJIXZ5ATLKR3PXMJ2XUY7A",
     "NMRBFAMUCRBPROQAF7HB33JBQQ",
+    "NB76OJIXZ5ATLKR3PXMJ2XUY7A",
     "UZUNTY5WKBFOZAVF27B6DICIVU",
     "CSODBM4QBBFMRDY6KXPLKABUVA",
     "BWK3J3WUPBGQPIDXSIGOTFYQZU",
