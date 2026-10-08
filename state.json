@@ -2246,6 +2246,7 @@
     "2026093056481"
   ],
   "딜사이트_산업": [
+    "170119",
     "170302",
     "170294",
     "170262",
@@ -2544,8 +2545,7 @@
     "169702",
     "169699",
     "169693",
-    "169685",
-    "169688"
+    "169685"
   ],
   "딜사이트_증권": [
     "170186",
@@ -2850,6 +2850,7 @@
     "168366"
   ],
   "딜사이트_인수합병": [
+    "170119",
     "170336",
     "170304",
     "170139",
@@ -3519,8 +3520,6 @@
     "4435228"
   ],
   "_global_sent_urls": [
-    "hankyung:202610020690g",
-    "dealsite:170084",
     "chosun:4TJBJCNNHNCHFDE64NNGV74ALY",
     "thebell:202610021559236920104877",
     "thebell:202610021539376440104695",
@@ -6518,7 +6517,9 @@
     "dealsite:170186",
     "einfomax:4438455",
     "hankyung:2026100816911",
-    "einfomax:4438466"
+    "einfomax:4438466",
+    "dealsite:170119",
+    "dealsite:170119"
   ],
   "조선비즈_증권": [
     "7ODVNUMCMVAIZNJCWJ7EEOPD6Q",
@@ -6526,8 +6527,8 @@
     "GYYGCNBQHE4GINRWGVRGCYJVMY",
     "HEZTIZDBGEZTKYJSGY4GEM3EGA",
     "GZSWEYRYGM2GGZJUGAYTKNZXGI",
-    "GE3DIZJVGY3DOMLDHE4DGM3EGA",
     "MZQTGZDCGY2WMZTGMUYDGZRXMY",
+    "GE3DIZJVGY3DOMLDHE4DGM3EGA",
     "TGUGUQ5OMNCKNMJMIMH2G33SRQ",
     "GM2TGOJTMMYTKMLFMNRTIMBTMQ",
     "CXITSTY66VA77EU2E23V4IROOM",
