@@ -2916,6 +2916,8 @@
     "166373"
   ],
   "연합인포_IB/기업": [
+    "4438556",
+    "4438555",
     "4438553",
     "4438552",
     "4438545",
@@ -3213,9 +3215,7 @@
     "4436028",
     "4436019",
     "4435958",
-    "4435956",
-    "4435949",
-    "4435942"
+    "4435956"
   ],
   "연합인포_증권": [
     "4438551",
@@ -3520,8 +3520,6 @@
     "4435299"
   ],
   "_global_sent_urls": [
-    "ibtomato:19725",
-    "dealsite:170105",
     "chosun:GAI2OCEGEFHDPDXIQQLJNQULEA",
     "chosun:6N4OW3N5ZNCSPF2CWRE7ZM22BM",
     "hankyung:2026100211307",
@@ -6519,7 +6517,9 @@
     "hankyung:2026101139707",
     "chosun:R7P5ATNKBBB5DJKL6TLG54ONO4",
     "chosun:SE2BMC6CCNA6DGJ3OFBG46WE5Y",
-    "chosun:MRSGENJVGM3DMOLEMQZDIZRWHE"
+    "chosun:MRSGENJVGM3DMOLEMQZDIZRWHE",
+    "einfomax:4438555",
+    "einfomax:4438556"
   ],
   "조선비즈_증권": [
     "MRSGENJVGM3DMOLEMQZDIZRWHE",
