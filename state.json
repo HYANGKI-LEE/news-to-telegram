@@ -906,6 +906,7 @@
     "202610071650129720107954"
   ],
   "IB토마토_산업": [
+    "19760",
     "19771",
     "19755",
     "19654",
@@ -2270,6 +2271,7 @@
     "2026100536811"
   ],
   "딜사이트_산업": [
+    "170205",
     "170502",
     "170476",
     "170495",
@@ -2568,8 +2570,7 @@
     "169754",
     "169750",
     "169741",
-    "169738",
-    "169726"
+    "169738"
   ],
   "딜사이트_증권": [
     "170208",
@@ -3549,8 +3550,6 @@
     "4435549"
   ],
   "_global_sent_urls": [
-    "einfomax:4437957",
-    "einfomax:4437958",
     "edaily:03476806645608984",
     "edaily:03476806645608984",
     "dealsite:170171",
@@ -6548,7 +6547,9 @@
     "chosun:4Y3DWEOQMJAJZDBJREPXPZR4VE",
     "ibtomato:19771",
     "ibtomato:19771",
-    "dealsite:170144"
+    "dealsite:170144",
+    "ibtomato:19760",
+    "dealsite:170205"
   ],
   "조선비즈_증권": [
     "GUD4CBLFUFAO5C7MEHCZX3AREY",
@@ -7170,8 +7171,8 @@
     "DTLPHJX5HBFHTPBP3RCI7FN2KE",
     "NKAMQ5F3V5EWLMN2FWFNNZYZW4",
     "WUN7AHKDQZHP3BVUZRM4XTAZ2M",
-    "EEPUDVOJGVAWRCAXEC3YZ3KP5E",
     "NB6ZBLT5KBGI7CIWGUW76OLOSM",
+    "EEPUDVOJGVAWRCAXEC3YZ3KP5E",
     "TCUNHTU3FNAAHNAA7YMBO4YPBE",
     "MPRJVEFVC5FQ5FALTKK647P6FU",
     "DB3FR5YXBRFHLE6B7AJLSGF7EQ",
