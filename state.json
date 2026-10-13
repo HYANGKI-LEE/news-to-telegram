@@ -1135,6 +1135,7 @@
     "19323"
   ],
   "IB토마토_금융": [
+    "19774",
     "19765",
     "19785",
     "19780",
@@ -2615,6 +2616,7 @@
     "169603"
   ],
   "딜사이트_증권": [
+    "168752",
     "170546",
     "170565",
     "170579",
@@ -2913,8 +2915,7 @@
     "168627",
     "168522",
     "168613",
-    "168321",
-    "168519"
+    "168321"
   ],
   "딜사이트_인수합병": [
     "170542",
@@ -3598,8 +3599,6 @@
     "4435867"
   ],
   "_global_sent_urls": [
-    "thebell:202610071654234760109446",
-    "thebell:202610071654234760109446",
     "chosun:F64BA46GJVFFJJUE6QCC5GZH4Y",
     "chosun:LHT5IUAXARAJXHCAO6R263V7CU",
     "thebell:202610070755134440104678",
@@ -6597,7 +6596,9 @@
     "chosun:36GFGOG75BA3DJJXD4DOLXKUKI",
     "ibtomato:19772",
     "hankyung:2026101400107",
-    "chosun:NA4SYE4FIZFPFIAHW4WWBG3DHA"
+    "chosun:NA4SYE4FIZFPFIAHW4WWBG3DHA",
+    "ibtomato:19774",
+    "dealsite:168752"
   ],
   "조선비즈_증권": [
     "26SGKSUZEJGMXEDK426XSWNBQI",
