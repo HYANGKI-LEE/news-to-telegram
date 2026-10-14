@@ -906,6 +906,7 @@
     "202610120815086880107694"
   ],
   "IB토마토_산업": [
+    "19790",
     "19781",
     "19674",
     "19778",
@@ -3643,7 +3644,6 @@
     "4436126"
   ],
   "_global_sent_urls": [
-    "thebell:202610081603569760109041",
     "thebell:202610081604224480105557",
     "thebell:202610081603569760109041",
     "thebell:202610081604224480105557",
@@ -6642,7 +6642,8 @@
     "chosun:BHEHP2ABWVCZHLUJPQOIX2YX6E",
     "chosun:YCT6UIAM2JFK3P3VMUOUIGQE6U",
     "chosun:BRB4Z3QF5BFTVHYSAHXIGBQX6E",
-    "ibtomato:19786"
+    "ibtomato:19786",
+    "ibtomato:19790"
   ],
   "조선비즈_증권": [
     "YCT6UIAM2JFK3P3VMUOUIGQE6U",
