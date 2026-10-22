@@ -3530,6 +3530,7 @@
     "4437918"
   ],
   "연합인포_증권": [
+    "4440572",
     "4440561",
     "4440541",
     "4440534",
@@ -3828,11 +3829,9 @@
     "4437879",
     "4437862",
     "4437852",
-    "4437838",
-    "4437826"
+    "4437838"
   ],
   "_global_sent_urls": [
-    "dealsite:170752",
     "dealsite:170761",
     "dealsite:170767",
     "dealsite:170769",
@@ -6831,7 +6830,8 @@
     "einfomax:4440561",
     "dealsite:171132",
     "chosun:XVJHWFZTNRAHNL77KNQKWPWIII",
-    "einfomax:4440569"
+    "einfomax:4440569",
+    "einfomax:4440572"
   ],
   "조선비즈_증권": [
     "IW4GI7T7RFHA7DHJ7MNMEORJZ4",
