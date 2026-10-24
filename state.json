@@ -2576,6 +2576,7 @@
     "2026101998701"
   ],
   "딜사이트_산업": [
+    "171282",
     "171287",
     "170946",
     "171271",
@@ -2874,8 +2875,7 @@
     "170519",
     "170563",
     "170481",
-    "170479",
-    "170477"
+    "170479"
   ],
   "딜사이트_증권": [
     "171275",
@@ -3883,7 +3883,6 @@
     "4438244"
   ],
   "_global_sent_urls": [
-    "edaily:03473526645614888",
     "edaily:03512886645614888",
     "edaily:03473526645614888",
     "edaily:03512886645614888",
@@ -6882,7 +6881,8 @@
     "hankyung:202610229019g",
     "hankyung:202610231399i",
     "chosun:EPDIQXOREJBRPCHU43ATYSOIKM",
-    "chosun:A6VPZWNGHNAZLLUG6RAOEADQYM"
+    "chosun:A6VPZWNGHNAZLLUG6RAOEADQYM",
+    "dealsite:171282"
   ],
   "조선비즈_증권": [
     "BBE7MXAAE5CH3CLEGE7K2JKBFA",
