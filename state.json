@@ -1186,6 +1186,7 @@
     "19323"
   ],
   "IB토마토_금융": [
+    "19889",
     "19894",
     "19911",
     "19871",
@@ -3892,7 +3893,6 @@
     "4438272"
   ],
   "_global_sent_urls": [
-    "thebell:202610201353454120104313",
     "chosun:QV3WHRFZ75GNJCW6BSODEJKGD4",
     "thebell:202610201430217680103562",
     "thebell:202610201421287280103132",
@@ -6891,7 +6891,8 @@
     "dealsite:170910",
     "dealsite:171162",
     "ibtomato:19884",
-    "chosun:MM3TIMBSMJSGMNBQG4ZWMMLEGM"
+    "chosun:MM3TIMBSMJSGMNBQG4ZWMMLEGM",
+    "ibtomato:19889"
   ],
   "조선비즈_증권": [
     "X3F33O2WHNARLDHQP4S7NKBVRU",
