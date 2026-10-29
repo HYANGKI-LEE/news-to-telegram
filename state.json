@@ -1208,6 +1208,7 @@
     "19299"
   ],
   "IB토마토_금융": [
+    "19951",
     "19933",
     "19931",
     "19935",
@@ -3997,7 +3998,6 @@
     "4439264"
   ],
   "_global_sent_urls": [
-    "ibtomato:19908",
     "chosun:TXQPXZDMPRGXJIZPH4IMHJCZW4",
     "thebell:202610270722044440109468",
     "thebell:202610270706032720102169",
@@ -6996,7 +6996,8 @@
     "einfomax:4442058",
     "hankyung:202610294379g",
     "chosun:P3THQWGEBVAB3PHB4TBBKXSY5Q",
-    "chosun:NGYVLAAYPNBURBQR7OY6WPLYTQ"
+    "chosun:NGYVLAAYPNBURBQR7OY6WPLYTQ",
+    "ibtomato:19951"
   ],
   "조선비즈_증권": [
     "NGYVLAAYPNBURBQR7OY6WPLYTQ",
