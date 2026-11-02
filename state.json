@@ -906,6 +906,7 @@
     "202610291841346160105168"
   ],
   "IB토마토_산업": [
+    "19973",
     "19976",
     "20011",
     "20003",
@@ -1204,8 +1205,7 @@
     "19350",
     "19349",
     "19344",
-    "19372",
-    "19368"
+    "19372"
   ],
   "IB토마토_금융": [
     "20002",
@@ -4041,7 +4041,6 @@
     "4439591"
   ],
   "_global_sent_urls": [
-    "ibtomato:19931",
     "hankyung:2026102813511",
     "hankyung:202610280248g",
     "chosun:COW7HFDK7FBZ3DOOTK25BPRWOA",
@@ -7040,7 +7039,8 @@
     "dealsite:171883",
     "chosun:KQWIEXFACRA2NAAS42WRFPWYUU",
     "chosun:S2MK3ZE6N5BAZBNLD4RZZXICEQ",
-    "chosun:Z3VZRUZUSFBNROFPOXKLGXO5CE"
+    "chosun:Z3VZRUZUSFBNROFPOXKLGXO5CE",
+    "ibtomato:19973"
   ],
   "조선비즈_증권": [
     "S2MK3ZE6N5BAZBNLD4RZZXICEQ",
