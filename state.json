@@ -2877,6 +2877,7 @@
     "202611083017g"
   ],
   "딜사이트_산업": [
+    "172696",
     "172728",
     "172733",
     "172730",
@@ -3175,8 +3176,7 @@
     "172170",
     "172168",
     "172144",
-    "172164",
-    "172158"
+    "172164"
   ],
   "딜사이트_증권": [
     "172723",
@@ -4199,7 +4199,6 @@
     "4441749"
   ],
   "_global_sent_urls": [
-    "thebell:202611100833374840103931",
     "thebell:202611100833374840103931",
     "chosun:MY2WGMDBGBQTENZSMIYDKMBXHA",
     "chosun:3FVIQISXFZHHLBLXGAPGYUMYQA",
@@ -7198,7 +7197,8 @@
     "thebell:202611130917515940107567",
     "chosun:W5VR4NRS6JBY5M3XY6L5TOAO3A",
     "hankyung:2026111349827",
-    "chosun:ZG7LY4VJVNBJBNZ4RKLKCJ3UFM"
+    "chosun:ZG7LY4VJVNBJBNZ4RKLKCJ3UFM",
+    "dealsite:172696"
   ],
   "조선비즈_증권": [
     "W5VR4NRS6JBY5M3XY6L5TOAO3A",
