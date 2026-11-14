@@ -2881,7 +2881,12 @@
     "202611060608g"
   ],
   "딜사이트_산업": [
+    "172797",
+    "172781",
     "172758",
+    "172615",
+    "172489",
+    "172360",
     "172793",
     "172795",
     "172796",
@@ -3175,14 +3180,10 @@
     "172065",
     "172000",
     "171990",
-    "171988",
-    "171784",
-    "172203",
-    "172211",
-    "172217",
-    "172218"
+    "171988"
   ],
   "딜사이트_증권": [
+    "172443",
     "172514",
     "172786",
     "172776",
@@ -3481,8 +3482,7 @@
     "170337",
     "170303",
     "170229",
-    "170330",
-    "170156"
+    "170330"
   ],
   "딜사이트_인수합병": [
     "172175",
@@ -4204,13 +4204,6 @@
     "4441890"
   ],
   "_global_sent_urls": [
-    "hankyung:202611106991g",
-    "chosun:4JLUAB6DMVHSFD7ZMTT7RP57QE",
-    "thebell:202611101109085600101733",
-    "thebell:202611101605121720109655",
-    "thebell:202611101324536160102221",
-    "thebell:202611101354048440103046",
-    "thebell:202611101359580920104520",
     "thebell:202611101109085600101733",
     "thebell:202611101605121720109655",
     "thebell:202611101324536160102221",
@@ -7203,7 +7196,14 @@
     "dealsite:172758",
     "einfomax:4444760",
     "einfomax:4444762",
-    "hankyung:202611135612i"
+    "hankyung:202611135612i",
+    "dealsite:172360",
+    "dealsite:172489",
+    "dealsite:172615",
+    "dealsite:172781",
+    "dealsite:172797",
+    "dealsite:172443",
+    "chosun:PBWX4ODBHZF7NIE3E2HFVFGH2Q"
   ],
   "조선비즈_증권": [
     "5QR7VB4PD5DRZB5MO7KTGDLYQQ",
@@ -7830,6 +7830,7 @@
     "5CJGHHX5X5C77LITYKBVRUBR6M",
     "56NA3KFCVZF4VGFGBTNQDQ32EM",
     "DSQAGU5WBFD7ZJL45CPL2RQJJU",
+    "PBWX4ODBHZF7NIE3E2HFVFGH2Q",
     "NLWBVDJKYRDS3FBQK4PKQHVMVE",
     "FRAOL7RK4FEYPDYIX6TAVNI5LA",
     "KGU7VWXW2JHJXB7RH6F4CK7BDA",
@@ -8108,8 +8109,7 @@
     "4KWMX4Q4CZHYVPFBAQOK2XTBRI",
     "TTKL6UWHDBA75L5ZOJUS56YCE4",
     "TIH2GOEXRRF2LBZDAWEDM23QIM",
-    "A67AZZ3HERAP3EIH573KXGR3KQ",
-    "3RSSKGMIGJFWLF7T2N2YKPJNPA"
+    "A67AZZ3HERAP3EIH573KXGR3KQ"
   ],
   "더벨_재무제표를읽는사람들": [
     "202611131908165040101878",
