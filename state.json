@@ -3183,6 +3183,7 @@
     "172181"
   ],
   "딜사이트_증권": [
+    "172769",
     "172443",
     "172514",
     "172786",
@@ -3481,8 +3482,7 @@
     "170335",
     "170337",
     "170303",
-    "170229",
-    "170330"
+    "170229"
   ],
   "딜사이트_인수합병": [
     "172175",
@@ -4204,7 +4204,6 @@
     "4441965"
   ],
   "_global_sent_urls": [
-    "hankyung:202611106629g",
     "chosun:ZGGE3RGWVNE3XN7QVHJZH6W36Y",
     "chosun:GXCJIPTTERANZFATGVKR3BDPVY",
     "chosun:5X5XHAODF5ERVACYQMORFRBB7A",
@@ -7203,7 +7202,8 @@
     "chosun:LURXRUOAP5HFZAJQXJJDUHZO2E",
     "chosun:4RHXVISICJDRNCKQFICUVPKZJI",
     "chosun:IFM7HUYYTVC3LAA2KYTG2XDCAY",
-    "chosun:MQYDANJUGFSDOZBRMQ2GMYRUMM"
+    "chosun:MQYDANJUGFSDOZBRMQ2GMYRUMM",
+    "dealsite:172769"
   ],
   "조선비즈_증권": [
     "MQYDANJUGFSDOZBRMQ2GMYRUMM",
