@@ -1208,6 +1208,7 @@
     "19474"
   ],
   "IB토마토_금융": [
+    "20117",
     "20108",
     "20096",
     "20104",
@@ -3185,6 +3186,7 @@
   "딜사이트_증권": [
     "172769",
     "172751",
+    "172680",
     "172443",
     "172514",
     "172786",
@@ -3481,8 +3483,7 @@
     "170314",
     "170339",
     "170335",
-    "170337",
-    "170303"
+    "170337"
   ],
   "딜사이트_인수합병": [
     "172751",
@@ -4205,8 +4206,6 @@
     "4441965"
   ],
   "_global_sent_urls": [
-    "dealsite:172268",
-    "dealsite:172402",
     "dealsite:172404",
     "ibtomato:20073",
     "hankyung:202611107649g",
@@ -7204,12 +7203,13 @@
     "chosun:MQEWZSIHONFRVLZITVWXWMKFBE",
     "ibtomato:20110",
     "chosun:N3VCJLKSA5BNFNZABQIUF3LWYM",
-    "chosun:N3VCJLKSA5BNFNZABQIUF3LWYM"
+    "chosun:N3VCJLKSA5BNFNZABQIUF3LWYM",
+    "ibtomato:20117",
+    "dealsite:172680"
   ],
   "조선비즈_증권": [
     "57ITYDDNNBD6NHZVGP5AFLATYU",
     "MQEWZSIHONFRVLZITVWXWMKFBE",
-    "LOKOUOQM3ZEB7FCYWIVQ3DXVHQ",
     "POYDJ325HZAXPH7TDOYHLD4OXE",
     "MQYDANJUGFSDOZBRMQ2GMYRUMM",
     "HE4TEYTFGZSGGMRVGZRWMNLEGY",
@@ -7236,6 +7236,7 @@
     "3KLO7PNZUNBBFDPCHVDGPFRRJI",
     "VE3SA3H5XFF6FEC5HKKZPBJDS4",
     "LU643KCEABE77NEKC3Z5LG67HM",
+    "LOKOUOQM3ZEB7FCYWIVQ3DXVHQ",
     "N3VCJLKSA5BNFNZABQIUF3LWYM",
     "RAEMVJ77J5BLFFORSZ74VE4PWE",
     "YRM6CXZSDVED5PDJE3ISC4PVGE",
