@@ -3673,6 +3673,7 @@
     "166373"
   ],
   "연합인포_IB/기업": [
+    "4445882",
     "4445879",
     "4445877",
     "4445876",
@@ -3971,8 +3972,7 @@
     "4443367",
     "4443341",
     "4443312",
-    "4443311",
-    "4443310"
+    "4443311"
   ],
   "연합인포_증권": [
     "4445873",
@@ -4277,7 +4277,6 @@
     "4443360"
   ],
   "_global_sent_urls": [
-    "thebell:202611161718391240103952",
     "thebell:202611171516336560105084",
     "thebell:202611171522070480101361",
     "thebell:202611171521126480107249",
@@ -7276,7 +7275,8 @@
     "chosun:KQECRX56TNCCZC4V56KGFDDMEE",
     "hankyung:202611208963g",
     "chosun:ME2TQMBUMFRGMYLEGAYTQNJTGE",
-    "chosun:HFEL3CDAOZGJRHBZE7UTQ2YYKU"
+    "chosun:HFEL3CDAOZGJRHBZE7UTQ2YYKU",
+    "einfomax:4445882"
   ],
   "조선비즈_증권": [
     "ME2TQMBUMFRGMYLEGAYTQNJTGE",
